@@ -29,7 +29,9 @@
 - name: configure | reset
   community.general.ufw:
     state: reset
-  when: configuration is changed
+  when:
+    - configuration is changed
+    - ufw_reset_before_apply
   tags:
     - ufw-configure-reset
 

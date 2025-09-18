@@ -23,3 +23,8 @@ ufw_etc_default_ipt_modules:
   - nf_conntrack_ftp
   - nf_nat_ftp
   - nf_conntrack_netbios_ns
+
+# Run `ufw reset` before applying UFW rules.
+# Be aware that `ufw reset` restores some UFW config files
+# to their original state from the package installation.
+ufw_reset_before_apply: false

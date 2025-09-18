@@ -6,8 +6,9 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   tags:
+    - firewall
     - ufw-configure-facts
 
 - name: configure | update configuration file(s)
@@ -16,7 +17,7 @@
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items:
     - src: etc/default/ufw.j2
       dest: /etc/default/ufw
@@ -24,6 +25,7 @@
       dest: /etc/ansible/facts.d/ufw.fact
   register: configuration
   tags:
+    - firewall
     - ufw-configure-facts
 
 - name: configure | reset
@@ -33,6 +35,7 @@
     - configuration is changed
     - ufw_reset_before_apply
   tags:
+    - firewall
     - ufw-configure-reset
 
 - name: configure | default (incoming) policy
@@ -41,6 +44,7 @@
     direction: incoming
   notify: reload ufw
   tags:
+    - firewall
     - ufw-configure-default-policy
     - ufw-configure-default-policy-incoming
 
@@ -50,6 +54,7 @@
     direction: outgoing
   notify: reload ufw
   tags:
+    - firewall
     - ufw-configure-default-policy
     - ufw-configure-default-policy-outgoing
 
@@ -86,6 +91,7 @@
   with_items: "{{ ufw_rules }}"
   notify: reload ufw
   tags:
+    - firewall
     - ufw-configure-rules
 
 - name: configure | logging
@@ -93,4 +99,5 @@
     logging: "{{ ufw_logging }}"
   notify: reload ufw
   tags:
+    - firewall
     - ufw-configure-logging

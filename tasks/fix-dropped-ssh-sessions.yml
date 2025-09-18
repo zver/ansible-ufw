@@ -4,6 +4,9 @@
   ansible.builtin.stat:
     path: /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal
   register: _nf_conntrack_tcp_be_liberal
+  tags:
+    - firewall
+    - ufw-fix-dropped-ssh-sessions-configure-kernel
 
 - name: fix dropped ssh sessions | configure kernel
   ansible.posix.sysctl:
@@ -14,4 +17,5 @@
     reload: true
   when: _nf_conntrack_tcp_be_liberal.stat.exists
   tags:
+    - firewall
     - ufw-fix-dropped-ssh-sessions-configure-kernel

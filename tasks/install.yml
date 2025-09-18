@@ -7,4 +7,5 @@
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
   tags:
+    - firewall
     - ufw-install-dependencies

@@ -1,0 +1,7 @@
+# Special blank file for include handlers only from another role.
+# For example:
+# - name: Call handlers from ufw role
+#   include_role:
+#     name: oefenweb.ufw
+#     handlers_from: main
+#     tasks_from: none
